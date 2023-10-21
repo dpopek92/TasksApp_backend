@@ -1,9 +1,16 @@
-import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
-import { GetUserFromToken } from 'src/common/decorators/get-user-from-token.decorator';
-import { AccessTokenGuard } from 'src/common/guards/access-token.guard';
-import { RefreshTokenGuard } from 'src/common/guards/refresh-token.guard';
-import { JwtPayload } from 'src/common/strategy/access-token.strategy';
-import { RefreshTokenPayload } from 'src/common/strategy/refresh-token';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  UseGuards,
+  HttpCode,
+} from '@nestjs/common';
+import { GetUserFromToken } from '../../common/decorators/get-user-from-token.decorator';
+import { AccessTokenGuard } from '../../common/guards/access-token.guard';
+import { RefreshTokenGuard } from '../../common/guards/refresh-token.guard';
+import { JwtPayload } from '../../common/strategy/access-token.strategy';
+import { RefreshTokenPayload } from '../../common/strategy/refresh-token';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -19,6 +26,7 @@ export class AuthController {
     return this.authService.register(createUserDto);
   }
 
+  @HttpCode(200)
   @Post('login')
   login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);

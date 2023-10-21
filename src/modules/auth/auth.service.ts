@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { hashData } from 'src/common/utils/hash-data.utils';
+import { hashData } from '../../common/utils/hash-data.utils';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 import { UsersService } from '../users/users.service';
 import { LoginDto } from './dto/login.dto';

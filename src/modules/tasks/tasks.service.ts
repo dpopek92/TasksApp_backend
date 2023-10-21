@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ClientSession, FilterQuery, FlattenMaps, Model } from 'mongoose';
-import { ISearchResult } from 'src/common/interfaces/search.interface';
-import { getPaginationParams } from 'src/common/utils/pagination.utils';
+import { ISearchResult } from '../../common/interfaces/search.interface';
+import { getPaginationParams } from '../../common/utils/pagination.utils';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { SearchTasksDto } from './dto/search-tasks.dto';
 import { UpdateTaskFieldDto } from './dto/update-task-field.dto';
@@ -69,7 +69,7 @@ export class TasksService {
       .exec();
   }
 
-  updateStatus(
+  updateField(
     userId: string,
     taskId: string,
     updateTaskFieldDto: UpdateTaskFieldDto,

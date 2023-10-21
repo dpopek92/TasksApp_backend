@@ -14,9 +14,9 @@ import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { UpdateTaskFieldDto } from './dto/update-task-field.dto';
-import { GetUserFromToken } from 'src/common/decorators/get-user-from-token.decorator';
-import { JwtPayload } from 'src/common/strategy/access-token.strategy';
-import { AccessTokenGuard } from 'src/common/guards/access-token.guard';
+import { GetUserFromToken } from '../../common/decorators/get-user-from-token.decorator';
+import { JwtPayload } from '../../common/strategy/access-token.strategy';
+import { AccessTokenGuard } from '../../common/guards/access-token.guard';
 import { SearchTasksDto } from './dto/search-tasks.dto';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 
@@ -65,12 +65,12 @@ export class TasksController {
 
   @UseGuards(AccessTokenGuard)
   @Patch(':taskId')
-  update(
+  updateField(
     @GetUserFromToken() user: JwtPayload,
     @Param('taskId') taskId: string,
     @Body() updateTaskFieldDto: UpdateTaskFieldDto,
   ) {
-    return this.tasksService.updateStatus(user.id, taskId, updateTaskFieldDto);
+    return this.tasksService.updateField(user.id, taskId, updateTaskFieldDto);
   }
 
   @UseGuards(AccessTokenGuard)

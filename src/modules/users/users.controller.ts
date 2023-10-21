@@ -1,7 +1,7 @@
 import { Controller, Delete, Get, UseGuards } from '@nestjs/common';
-import { GetUserFromToken } from 'src/common/decorators/get-user-from-token.decorator';
-import { AccessTokenGuard } from 'src/common/guards/access-token.guard';
-import { JwtPayload } from 'src/common/strategy/access-token.strategy';
+import { GetUserFromToken } from '../../common/decorators/get-user-from-token.decorator';
+import { AccessTokenGuard } from '../../common/guards/access-token.guard';
+import { JwtPayload } from '../../common/strategy/access-token.strategy';
 import { UsersService } from './users.service';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 

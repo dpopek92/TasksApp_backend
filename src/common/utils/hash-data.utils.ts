@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 export const hashData = async (data: string) => {
   const salt = await bcrypt.genSalt();

@@ -11,7 +11,7 @@ export class Task {
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'User', required: true })
   user: string;
 
-  @Prop({ type: String, required: true })
+  @Prop({ type: String, required: true, minlength: 3, maxlength: 500 })
   description: string;
 
   @Prop({ type: String, enum: TaskStatus, default: TaskStatus.UNDONE })

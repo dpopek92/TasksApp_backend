@@ -13,6 +13,8 @@ async function bootstrap() {
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
 
+  app.enableCors();
+
   const config = new DocumentBuilder()
     .addBearerAuth()
     .setTitle('Tasks app')
@@ -22,7 +24,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  const port = configService.get('APP_PORT') || 8000;
+  const port = configService.get('APP_PORT') || 3001;
   await app.listen(port);
 }
 bootstrap();

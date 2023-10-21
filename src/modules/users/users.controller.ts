@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, UseGuards } from '@nestjs/common';
 import { GetUserFromToken } from 'src/common/decorators/get-user-from-token.decorator';
 import { AccessTokenGuard } from 'src/common/guards/access-token.guard';
 import { JwtPayload } from 'src/common/strategy/access-token.strategy';
@@ -15,5 +15,11 @@ export class UsersController {
   @Get('me')
   getMe(@GetUserFromToken() user: JwtPayload) {
     return this.usersService.getUserById(user.id);
+  }
+
+  @UseGuards(AccessTokenGuard)
+  @Delete('me')
+  deleteMe(@GetUserFromToken() user: JwtPayload) {
+    return this.usersService.remove(user.id);
   }
 }

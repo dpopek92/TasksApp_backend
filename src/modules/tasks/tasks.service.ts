@@ -39,6 +39,7 @@ export class TasksService {
 
     const tasks = await this.taskModel
       .find(searchQuery)
+      .sort({ createdAt: -1 })
       .skip(skipped)
       .limit(itemsPerPage)
       .lean()

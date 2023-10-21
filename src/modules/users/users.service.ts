@@ -21,7 +21,11 @@ export class UsersService {
   }
 
   async getUserById(userId: string) {
-    return this.userModel.findById(userId).select('-password').lean().exec();
+    return this.userModel
+      .findById(userId)
+      .select('-password -refreshToken')
+      .lean()
+      .exec();
   }
 
   async getUserByEmail(email: string) {

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { ClientSession, FilterQuery, FlattenMaps, Model } from 'mongoose';
 import { ISearchResult } from '../../common/interfaces/search.interface';
@@ -55,8 +55,14 @@ export class TasksService {
     };
   }
 
-  findOne(userId: string, taskId: string) {
-    return this.taskModel.findOne({ user: userId, _id: taskId }).lean().exec();
+  async findOne(userId: string, taskId: string) {
+    const task = await this.taskModel
+      .findOne({ user: userId, _id: taskId })
+      .lean()
+      .exec();
+    if (!task) throw new NotFoundException();
+
+    return task;
   }
 
   update(userId: string, taskId: string, updateTaskDto: UpdateTaskDto) {

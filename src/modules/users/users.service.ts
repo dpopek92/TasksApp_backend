@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { Connection, Model } from 'mongoose';
 import { TasksService } from '../tasks/tasks.service';
@@ -20,11 +24,14 @@ export class UsersService {
   }
 
   async getUserById(userId: string) {
-    return this.userModel
+    const user = await this.userModel
       .findById(userId)
       .select('-password -refreshToken')
       .lean()
       .exec();
+    if (!user) throw new NotFoundException();
+
+    return user;
   }
 
   async getUserByEmail(email: string) {

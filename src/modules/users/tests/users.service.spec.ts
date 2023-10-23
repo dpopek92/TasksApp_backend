@@ -19,7 +19,9 @@ const mockFindOne = jest.fn().mockImplementation(() => ({
 const mockFindById = jest.fn().mockImplementation(() => ({
   select: jest.fn().mockImplementation(() => ({
     lean: jest.fn().mockImplementation(() => ({
-      exec: jest.fn(),
+      exec: jest
+        .fn()
+        .mockReturnValue({ email: 'email@email.com', password: 'pass' }),
     })),
   })),
 }));

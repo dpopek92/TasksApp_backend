@@ -19,7 +19,9 @@ const mockFind = jest.fn().mockImplementation(() => ({
 }));
 const mockFindOne = jest.fn().mockImplementation(() => ({
   lean: jest.fn().mockImplementation(() => ({
-    exec: jest.fn(),
+    exec: jest
+      .fn()
+      .mockReturnValue({ description: 'test', status: TaskStatus.DONE }),
   })),
 }));
 const mockFindOneAndUpdate = jest.fn().mockImplementation(() => ({
